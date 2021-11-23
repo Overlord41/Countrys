@@ -1,0 +1,23 @@
+.CardDetail {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.CardDetail img{
+    height: 250px;
+    width: 340px;
+}
+
+.buttonReturn{
+    color: white;
+    margin: 10px;
+    background-color: royalblue;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}

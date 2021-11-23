@@ -1,0 +1,24 @@
+.SearchNav {
+    display: flex;
+    justify-content: flex-end;
+    height: 25px;
+    margin: 10px;
+    background-color: rgba(113, 143, 240, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.SearchNav button{
+    margin-left: 5px;
+}
+
+
+.AgregarAct {
+    cursor: pointer;
+    background-color: rgb(92, 73, 194);
+    padding: 1px 10px 1px 10px;
+    margin-right: 25px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}

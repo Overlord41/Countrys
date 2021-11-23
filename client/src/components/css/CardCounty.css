@@ -1,0 +1,53 @@
+.tarjetaCountry {
+    margin: 10px;
+    width: 180px;
+    height: auto;
+    background-color: #183147;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border-radius: 7px;
+    color: #fff;
+}
+
+.tarjetaCountry h2{
+    background-color: #407090;
+    padding: 5px;
+    margin-top: 7px;
+    width: 80%;
+    border-radius: 3px;
+}
+
+.imagenBandera {
+    height: 100px;
+    width: 150px;
+}
+
+.tarjetaCountry div img{
+    height: 100px;
+    width: 150px;
+}
+
+.tarjetaCountry h4{
+    margin: 10px;
+}
+
+
+.buttonDetalles{
+    background-color: #65aad8;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.buttonDetalles:hover {
+    text-align: center;
+    justify-content: center;
+    background-color: #111213;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 15px 5px 15px;
+}

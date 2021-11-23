@@ -1,0 +1,19 @@
+.Countries_content {
+    margin: 10px;
+    background-color: rgba(84, 120, 234, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+select{
+    margin-right: 15px;
+}
+
+.btnsPaginado{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

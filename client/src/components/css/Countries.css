@@ -1,0 +1,16 @@
+.Countries {
+    background-image: url('../../image/TRAVEL2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Elements{
+    /* background-color: goldenrod; */
+    height: 90%;
+    width: 80%;
+}
