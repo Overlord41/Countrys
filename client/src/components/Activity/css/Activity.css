@@ -8,3 +8,33 @@
     justify-content: center;
     flex-direction: column;
 }
+
+
+.ContainerForm{
+    background-color: rgba(183, 208, 239,0.5);
+    width: 80%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.btnRegresar{
+    display: inline;
+    text-decoration: none;
+    background-color: rgb(66, 66, 66);
+    border-radius: 7px;
+    padding: 20px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.btnRegresar:hover{
+    background-color: rgb(143, 138, 138);
+    color: #000;
+    padding: 18px;
+    font-size: 20px;
+    border: 2px solid;
+    border-color: rgb(66, 66, 66);
+}

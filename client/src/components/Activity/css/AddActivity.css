@@ -1,0 +1,9 @@
+.addActivity {
+    background-color: rgba(60, 49, 219, 0.5);
+    padding: 40px;
+    margin: 20px;
+}
+
+.addActivity * {
+    margin: 10px;
+}

@@ -14,3 +14,9 @@
     height: 90%;
     width: 80%;
 }
+
+.claseInicio{
+    cursor: pointer;
+    font-size: 25px;
+    margin-bottom: 10px;
+}

@@ -10,8 +10,8 @@
         flex-direction: column;
 }
 
-.Home1 h1{
-    text-align: center;
+.Home1 p{
+    font-size: 70px;
 }
 
 Link{
@@ -23,6 +23,9 @@ Link{
     text-decoration: none;
     padding: 10px;
     border-radius: 5px;
+    font-size: 30px;
+    color: #000;
+    border: 2px #000 solid;
 }
 
 .btnIngresar:hover {

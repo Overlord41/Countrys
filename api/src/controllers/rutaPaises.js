@@ -3,12 +3,12 @@ const { Op } = require('sequelize');
 
 const rutaPaises = async (req, res, next) => {
     let {
-        name,
         activity,
         continent,
         type,
         order,
-        page
+        page,
+        name
     } = req.query
 
     let dbCountries = [];
@@ -16,25 +16,14 @@ const rutaPaises = async (req, res, next) => {
     page = page ? page : 1
     const CountryXpage = 10;
 
-
     //Encontrar por Nombre
     if(name && name !== ""){
         dbCountries = await Country.findAll({
             where: {
                 name: {
                         [Op.iLike]: `%${name}%`
-                      },
-                include: {
-                    model: Activity,
-                    through: {
-                        attributes: []
-                    }
-                }
-            }
-        });
-        allCountries = dbCountries;
-    }else{
-        dbCountries = await Country.findAll({
+                      }
+            },
             include: {
                 model: Activity,
                 through: {
@@ -42,76 +31,78 @@ const rutaPaises = async (req, res, next) => {
                 }
             }
         });
-        allCountries = dbCountries;
-    }
-
-    //Encontrar por actividad Turística
-    // if(activity !== "allActivities"){
-    //     dbCountries = await Country.findAll({
-    //         include: {
-    //             model: Activity,
-    //             where: {
-    //                 name: {
-    //                         [Op.iLike]: `%${activity}%`
-    //                       },
-    //             through: {
-    //                 attributes: []
-    //                     }
-    //             }
-    //         }
-    //     })
-    //     allCountries = dbCountries;
-    // }else{
-    //     dbCountries = await Country.findAll({
-    //         include: {
-    //             model: Activity,
-    //             through: {
-    //                 attributes: []
-    //             }
-    //         }
-    //     });
-    //     allCountries = dbCountries;
-    // }
-
-    //Ordenamiento por tipo AZ o población
-    if(type=='AZ'){
-        //Ordenamiento A-Z
-        if(order === "asc" || !order || order === ""){
-            allCountries = allCountries.sort((a,b) =>{
-                return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-            })
-        }else if(order === "des"){
-            allCountries = allCountries.sort((a,b) =>{
-                return b.name.toLowerCase().localeCompare(a.name.toLowerCase())
-            })
-        }
-    }else if(type=='population'){
-        //Ordenamiento por población
-        if(order === "asc" || !order || order === ""){
-            allCountries = allCountries.sort((a,b) =>{
-                return a.population - b.population;
-            })
-        }else if(order === "des"){
-            allCountries = allCountries.sort((a,b) =>{
-                return b.population - a.population
-            })
-        }
-    }
-
-     let result = [];
-    //Paginado
-    if(continent === 'Todos'){
-        result = allCountries.slice((CountryXpage * (page -  1)) , (CountryXpage * (page -  1)) + CountryXpage )
+        dbCountries = dbCountries.sort((a,b) =>{
+            return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+        })
+        res.send({
+            result: dbCountries,
+            count: dbCountries.length
+        })
     }else{
-        // Para hacer el paginado den el front
-        result = allCountries;
+        // Encontrar por actividad Turística
+        if(activity !== "allActivities"){
+            dbCountries = await Country.findAll({
+                include: {
+                    model: Activity,
+                    where: { id: activity },
+                    through: {
+                        attributes: []
+                            }
+                    }
+                })
+            allCountries = dbCountries;
+        }else{
+            dbCountries = await Country.findAll({
+                include: {
+                    model: Activity,
+                    through: {
+                        attributes: []
+                    }
+                }
+            });
+            allCountries = dbCountries;
+        }
+
+        //Ordenamiento por tipo AZ o población
+        if(type=='AZ'){
+            //Ordenamiento A-Z
+            if(order === "asc" || !order || order === ""){
+                allCountries = allCountries.sort((a,b) =>{
+                    return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+                })
+            }else if(order === "des"){
+                allCountries = allCountries.sort((a,b) =>{
+                    return b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+                })
+            }
+        }else if(type=='population'){
+            //Ordenamiento por población
+            if(order === "asc" || !order || order === ""){
+                allCountries = allCountries.sort((a,b) =>{
+                    return a.population - b.population;
+                })
+            }else if(order === "des"){
+                allCountries = allCountries.sort((a,b) =>{
+                    return b.population - a.population
+                })
+            }
+        }
+
+        let result = [];
+        //Paginado
+        if(continent === 'Todos'){
+            result = allCountries.slice((CountryXpage * (page -  1)) , (CountryXpage * (page -  1)) + CountryXpage )
+        }else{
+            // Para hacer el paginado desde el front
+            result = allCountries;
+        }
+
+
+        res.send({
+            result: result,
+            count: allCountries.length
+        })
     }
-
-
-    res.send({
-        result: result,
-        count: allCountries.length
-    })
 }
 
 
@@ -134,6 +125,64 @@ const rutaIdPais = async (req, res, next) => {
     }catch(error){
         next(error)
     }
+}
+
+const rutaPrueba = async(req, res, next) => {
+    const { nombre, actividad } = req.query;
+    if(nombre && nombre !== ""){
+        dbCountries = await Country.findAll({
+            where: {
+                name: {
+                        [Op.iLike]: `%${nombre}%`
+                      }
+            },
+            include: {
+                model: Activity,
+                through: {
+                    attributes: []
+                }
+            }
+        });
+        allCountries= dbCountries;
+    }else{
+        dbCountries = await Country.findAll({
+            include: {
+                model: Activity,
+                through: {
+                    attributes: []
+                }
+            }
+        });
+        allCountries = dbCountries;
+    }
+
+
+//     let { activ } =  req.query
+//     // Encontrar por actividad Turística
+//     if(activ !== "allActivities"){
+//         dbCountries = await Country.findAll({
+//             include: {
+//                 model: Activity,
+//                 where: { id: activ},
+//                 through: {
+//                     attributes: []
+//                         }
+//                 }
+//         })
+//         allCountries = dbCountries;
+//     }else{
+//         dbCountries = await Country.findAll({
+//             include: {
+//                 model: Activity,
+//                 through: {
+//                     attributes: []
+//                 }
+//             }
+//         });
+//         allCountries = dbCountries;
+//     }
+    res.json(allCountries);
+    // res.json(allCountries)
 }
 
 module.exports = {

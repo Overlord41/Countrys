@@ -1,9 +1,10 @@
 const { Router } = require('express');
-const { rutaPaises, rutaIdPais } = require('../controllers/rutaPaises');
+const { rutaPaises, rutaIdPais, rutaPrueba } = require('../controllers/rutaPaises');
 
 const router = Router();
 
 
+// router.get('/listact', rutaPrueba);
 router.get('/', rutaPaises);
 router.get('/:id', rutaIdPais);
 

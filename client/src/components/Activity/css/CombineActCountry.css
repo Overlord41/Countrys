@@ -1,0 +1,9 @@
+.combineActCountry {
+    background-color: rgba(60, 49, 219, 0.5);
+    padding: 40px;
+    margin: 20px;
+}
+
+.combineActCountry * {
+    margin: 10px;
+}

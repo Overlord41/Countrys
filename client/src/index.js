@@ -14,7 +14,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Routes>
         <Route path='/' exact element={<Home/>}/>
-        <Route path='contries' element={<Countries/>}/>
+        <Route path='countries' element={<Countries/>}/>
         <Route path='activity' element={<Activity/>} />
       </Routes>
     </Provider>

@@ -1,12 +1,13 @@
-import { GET_COUNTRIES, GET_ACTIVITYS, GET_COUNTRY_DETAIL, POST_ACTIVITY, GET_COUNTRIES_PAGE, GET_COUNTRIES_DEFAULT, CHANGE_FILTER, GET_DETAIL_COUNTRY, DROP_DETAIL_COUNTRY } from "../actions/action_type";
+import { GET_ACTIVITIES, GET_COUNTRIES_PAGE, GET_COUNTRIES_DEFAULT, CHANGE_FILTER, GET_DETAIL_COUNTRY, DROP_DETAIL_COUNTRY, GET_COUNTRY_FOR_NAME, DROP_NAME_SEARCH } from "../actions/action_type";
 
 const initialState = {
     countries: [],
-    activities: [],
+    activities: undefined,
     detailCountry: undefined,
     page: 1,
     typeOrden: 'AZ',
-    numCountries: undefined
+    numCountries: undefined,
+    nameCountry: undefined
 }
 
 export const rootRecuder = (state = initialState, action) =>{
@@ -25,7 +26,7 @@ export const rootRecuder = (state = initialState, action) =>{
                 page:action.payload.page
             }
         case CHANGE_FILTER:
-            if(action.payload.typeContinent == 'Todos' ){
+            if(action.payload.typeContinent === 'Todos' ){
                 return {
                     ...state,
                     numCountries:action.payload.data.count,
@@ -53,6 +54,23 @@ export const rootRecuder = (state = initialState, action) =>{
             return {
                 ...state,
                 detailCountry: undefined
+            }
+        case GET_ACTIVITIES:
+            return {
+                ...state,
+                activities: action.payload
+            }
+        case GET_COUNTRY_FOR_NAME:
+            return {
+                ...state,
+                nameCountry: action.payload.nameCountry,
+                countries: action.payload.data.result,
+                numCountries: action.payload.data.count
+            }
+        case DROP_NAME_SEARCH:
+            return {
+                ...state,
+                nameCountry: undefined
             }
         default:
             return state

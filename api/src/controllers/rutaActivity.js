@@ -3,15 +3,20 @@ const { Activity } = require('../db');
 const postActivity = async(req, res, next) => {
     const actividad = req.body;
     try{
-        await Activity.findOrCreate({
-            where: {name: actividad.name},
-            defaults: {
-                dificult: actividad.dificult,
-                duration: actividad.duration,
-                temporada: actividad.temporada
-            }
-        })
-        res.send('Actividad agregada con éxito');
+        const foundActivity = await Activity.findOne({where: {name: actividad.name}});
+        if(foundActivity){
+            res.send("Esta actividad ya se encuentra registrada")
+        }else{
+            await Activity.findOrCreate({
+                where: {name: actividad.name},
+                defaults: {
+                    dificult: actividad.dificult,
+                    duration: actividad.duration,
+                    temporada: actividad.temporada
+                }
+            })
+            res.send('Actividad agregada con éxito');
+        }
     }catch(error){
         next(error);
     }
@@ -30,8 +35,22 @@ const postAddActivityCountry = async(req, res, next) => {
     }
 }
 
+const getActivity = async(req, res, next) => {
+    const datosActivity = await Activity.findAll();
+    try{
+        if(datosActivity){
+            res.json(datosActivity)
+        }else{
+            res.send('No se encontraron actividades');
+        }
+    }catch(error){
+        next(error);
+    }
+}
+
 
 module.exports = {
     postActivity,
-    postAddActivityCountry
+    postAddActivityCountry,
+    getActivity
 }

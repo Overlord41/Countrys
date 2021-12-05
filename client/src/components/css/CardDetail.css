@@ -1,23 +1,45 @@
 .CardDetail {
     display: flex;
     flex-direction: column;
-    background-color: red;
     justify-content: center;
     align-items: center;
     padding: 10px;
     margin-top: 20px;
 }
 
-.CardDetail img{
+.intoCardDetail img{
     height: 250px;
     width: 340px;
 }
 
+.intoCardDetail{
+    background-color: #183147;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.infoDetail{
+    color: #fff;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #407090;
+    padding: 15px;
+    font-size: 20px;
+}
+
+
+
 .buttonReturn{
     color: white;
     margin: 10px;
-    background-color: royalblue;
+    background-color: #65aad8;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    text-align: center;
+}
+
+.buttonReturn:hover{
+    background-color: rgb(0, 0, 0);
+    color: #fff;
 }

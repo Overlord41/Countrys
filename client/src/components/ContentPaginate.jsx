@@ -3,12 +3,13 @@ import { CardCounty } from './CardCounty'
 import './css/ContentPaginate.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { BtnPaginado } from './BtnPaginado';
-import { action_change_filter, action_get_detail_country } from '../redux/actions/actions';
+import { action_change_filter, action_drop_name_search, action_get_detail_country, get_countries_default } from '../redux/actions/actions';
 
 export const ContentPaginate = () => {
     const countriesStore = useSelector(store => store.countries);
     const numCountriesStore = useSelector(store => store.numCountries);
     const numButtons = Math.ceil(numCountriesStore/10);
+    const nameCountry = useSelector(store => store.nameCountry)
 
     const dispatch = useDispatch();
 
@@ -25,11 +26,20 @@ export const ContentPaginate = () => {
         dispatch(action_get_detail_country(data));
     }
 
+    const dropSearch = () =>{
+        dispatch(action_drop_name_search());
+        dispatch(get_countries_default());
+    }
+
     return (
         <>
         <div className='Prueba1'>
+            {
+                (nameCountry)&&
+                <div className='styleBusqueda'><h2>Buscaste: "{nameCountry}" </h2><button onClick={dropSearch}>X</button></div>
+            }
             {countriesStore.map(e=> {
-                    return (<CardCounty key={e.id} id={e.id} name={e.name} flag={e.flag} continents={e.continents} capital={e.capital} subregion={e.subregion} area={e.area} population={e.population} activities={e.activities} searchDetails={searchDetails} />)
+                    return (<CardCounty key={e.id} id={e.id} name={e.name} flag={e.flag} continents={e.continents} searchDetails={searchDetails} />)
                 })
             }
         </div>

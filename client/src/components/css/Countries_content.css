@@ -17,3 +17,7 @@ select{
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.contentFilter{
+    margin-bottom: 20px;
+}
